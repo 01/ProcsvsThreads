@@ -48,7 +48,7 @@ compressT_LOLS(char * filename, int threadCount){
    			work->offset = offset;
    			offset+=work->length; 
    		}
-   		 
+   		// printf("Offset: %d\n", work->offset);
    		pthread_create(&tid[i], NULL, &RLEcompress, (void *)work);
    }
    for(i=0; i<threadCount; i++){
@@ -60,9 +60,9 @@ void* RLEcompress(void * workInf){
 	
 	workInfo * work = workInf;
 	int unencodedLength = work->length;
-	printf("Unencoded Length: %d\n",unencodedLength);
+	//printf("Unencoded Length: %d\n",unencodedLength);
 	int threadID = work->thread_id;
-	printf("Thread %d\n", threadID);
+	//printf("Thread %d\n", threadID);
 	FILE * fp =  fopen(work->filename, "r");
 	long length;
 	 if(!fp) printf("File not found\n");
@@ -76,8 +76,9 @@ void* RLEcompress(void * workInf){
 	int currentEncodedLength = 0;
 	for(int i=0; i<unencodedLength; i++){
 		current = fgetc(fp);
-		printf("Letter : %c  Iteration: %d\n",current, i);
-		if(!isalpha(current))continue;
+		//printf("Letter : %c  Iteration: %d\n",current, i);
+		//if(threadID==2) printf("Character %c Count: %d\n", current, count);
+		if(!isalpha(current) && i<unencodedLength-1)continue;
 		if(count==0) {
 			currentLetter = current;
 			count++;
@@ -89,9 +90,12 @@ void* RLEcompress(void * workInf){
 			currentEncodedLength = strlen(encoded);
 			if(count>2){
 				//printf("Count: %d Letter: %c i: %d", count, currentLetter, i);
+				//if(threadID==2) printf("Makes it here");
+				if(i==(unencodedLength-1)) count++;
 				sprintf((encoded+strlen(encoded)), "%d", count);
-				*(encoded + strlen(encoded))= currentLetter;
 				*(encoded + strlen(encoded)+1)= '\0';
+				*(encoded + strlen(encoded))= currentLetter;
+				
 			}
 			else if (count == 2){
 				*(encoded + currentEncodedLength+2)= '\0';
@@ -101,8 +105,9 @@ void* RLEcompress(void * workInf){
 				
 			}
 			else{
-				*(encoded + strlen(encoded))= currentLetter;
+				
 				*(encoded + strlen(encoded)+1)= '\0';
+				*(encoded + strlen(encoded))= currentLetter;
 			}
 		count = 1;
 		currentLetter= current;
