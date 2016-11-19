@@ -76,9 +76,8 @@ void* RLEcompress(void * workInf){
 	int currentEncodedLength = 0;
 	for(int i=0; i<unencodedLength; i++){
 		current = fgetc(fp);
-		
+		printf("Letter : %c  Iteration: %d\n",current, i);
 		if(!isalpha(current))continue;
-printf("Current character %c Count:%d\n", current, count);
 		if(count==0) {
 			currentLetter = current;
 			count++;
@@ -87,20 +86,19 @@ printf("Current character %c Count:%d\n", current, count);
 		
 		
 		if( current != currentLetter || (i==(unencodedLength-1))){
-			printf("COunt: %d", count);
 			currentEncodedLength = strlen(encoded);
 			if(count>2){
-				sprintf((encoded+strlen(encoded)), "%d", count+1);
+				//printf("Count: %d Letter: %c i: %d", count, currentLetter, i);
+				sprintf((encoded+strlen(encoded)), "%d", count);
 				*(encoded + strlen(encoded))= currentLetter;
 				*(encoded + strlen(encoded)+1)= '\0';
 			}
 			else if (count == 2){
-				printf("Makes it here\n");
 				*(encoded + currentEncodedLength+2)= '\0';
 				*(encoded + currentEncodedLength)= currentLetter;
 				*(encoded + currentEncodedLength+1)= currentLetter;
 				
-				printf("Encoded : %s\n", encoded);
+				
 			}
 			else{
 				*(encoded + strlen(encoded))= currentLetter;
@@ -111,8 +109,9 @@ printf("Current character %c Count:%d\n", current, count);
 		}
 		else count++;
 	}
+	close(fp);
 	encoded = realloc(encoded, strlen(encoded)+1);
-	printf("Encoded %s\n", encoded);
+	printf("Thread %d: Encoded %s\n", threadID, encoded);
 }
 
 int main(int argc, char *argv[]) {
