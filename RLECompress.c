@@ -10,8 +10,18 @@ typedef struct{
 	char * filename;
 	int length;
 	int offset; 
+	int numThreads;
 } workInfo;
 
+int numDigits(int threads){
+	int n = threads;
+	int count = 0;
+	while(n!=0){
+		n/=10;
+		++count;
+	}
+	return count;
+}
 void * RLEcompress(void * work);
 
 compressT_LOLS(char * filename, int threadCount){
@@ -20,6 +30,7 @@ compressT_LOLS(char * filename, int threadCount){
    pthread_t tid[threadCount];
    long length;
    fp = fopen(filename, "r");
+
    if(!fp) printf("File not found\n");
    else{
    		fseek(fp, 0L, SEEK_END);
@@ -27,7 +38,10 @@ compressT_LOLS(char * filename, int threadCount){
    		printf("the file's length is %1dB\n", length);
    		rewind(fp);
    }
-   length--;
+   if(threadCount>length){
+   		printf("Can not create more threads then there are characters in file");
+   		exit(1);
+   }
    int remainder = length % threadCount;
    int threadLength = (length - remainder) / threadCount;
 
@@ -35,8 +49,9 @@ compressT_LOLS(char * filename, int threadCount){
    int offset=0;
    for(i=0; i<threadCount; i++){
    		workInfo * work= malloc(sizeof(workInfo));
-   		work->filename = "./stuff.txt";
+   		work->filename = filename;
    		work->thread_id = i;
+   		work->numThreads = threadCount;
 
    		if(i==0){
    			work->length = threadLength + remainder;
@@ -64,6 +79,15 @@ void* RLEcompress(void * workInf){
 	int threadID = work->thread_id;
 	//printf("Thread %d\n", threadID);
 	FILE * fp =  fopen(work->filename, "r");
+	char * outputFile = malloc(strlen(work->filename) + numDigits(threadID)+1);
+	strcpy(outputFile, work->filename);
+	*(outputFile+strlen(outputFile)-4)='_';
+	if(work->numThreads > 1)sprintf((outputFile+strlen(outputFile)), "_LOLS%d", threadID);
+	else sprintf((outputFile+strlen(outputFile)), "_LOLS");
+
+	FILE * output = fopen(outputFile, "w");
+	if(!output) printf("File not found\n");
+
 	long length;
 	 if(!fp) printf("File not found\n");
    else{
@@ -91,23 +115,18 @@ void* RLEcompress(void * workInf){
 			if(count>2){
 				//printf("Count: %d Letter: %c i: %d", count, currentLetter, i);
 				//if(threadID==2) printf("Makes it here");
-				if(i==(unencodedLength-1)) count++;
-				sprintf((encoded+strlen(encoded)), "%d", count);
-				*(encoded + strlen(encoded)+1)= '\0';
-				*(encoded + strlen(encoded))= currentLetter;
+				//if(i==(unencodedLength-1)) count++;
+				fprintf(output, "%d", count);
+				fprintf(output, "%c", currentLetter);
 				
 			}
 			else if (count == 2){
-				*(encoded + currentEncodedLength+2)= '\0';
-				*(encoded + currentEncodedLength)= currentLetter;
-				*(encoded + currentEncodedLength+1)= currentLetter;
+				fprintf(output, "%c%c", currentLetter, currentLetter);
 				
 				
 			}
 			else{
-				
-				*(encoded + strlen(encoded)+1)= '\0';
-				*(encoded + strlen(encoded))= currentLetter;
+				fprintf(output, "%c", currentLetter);
 			}
 		count = 1;
 		currentLetter= current;
@@ -115,6 +134,7 @@ void* RLEcompress(void * workInf){
 		else count++;
 	}
 	close(fp);
+	free(work);
 	encoded = realloc(encoded, strlen(encoded)+1);
 	printf("Thread %d: Encoded %s\n", threadID, encoded);
 }
@@ -135,7 +155,7 @@ int main(int argc, char *argv[]) {
    }
    rewind(fp);
   printf("Makes it here\n");
-compressT_LOLS("./stuff.txt", 3);
+compressT_LOLS("./stuff.txt", 1);
 
   return 0;
 }
