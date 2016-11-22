@@ -84,7 +84,9 @@ void RLEcompress(void * workInf){
 				fprintf(output, "%c", letter);
 			}
 
-			fprintf(output, "%c", current);
+			if(isalpha(current)){
+				fprintf(output, "%c", current);
+			}
 
 			continue;
 		}

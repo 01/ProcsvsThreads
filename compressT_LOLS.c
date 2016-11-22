@@ -12,7 +12,7 @@ void compressT_LOLS(char * filename, int threadCount){
    else{
    		fseek(fp, 0L, SEEK_END);
    		length = ftell(fp)-1;
-   		printf("the file's length is %1dB\n", length);
+   		printf("the file's length is %ldB\n", length);
    		rewind(fp);
    }
    if(threadCount>length){
