@@ -11,7 +11,7 @@ int numDigits(int threads){
 	return count;
 }
 
-void * RLEcompress(void * workInf){
+void RLEcompress(void * workInf){
 		
 	workInfo * work = workInf;
 
@@ -34,8 +34,6 @@ void * RLEcompress(void * workInf){
 	if(!output){
 		printf("File not found\n");
 	}
-
-	long length;
 
 	if(!fp){
 		printf("File not found\n");
@@ -132,7 +130,7 @@ void * RLEcompress(void * workInf){
 
 	}
 
-	close(fp);
+	fclose(fp);
 	free(work);
 	encoded = realloc(encoded, strlen(encoded)+1);
 	

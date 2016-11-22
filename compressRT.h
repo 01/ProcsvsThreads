@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
 
 typedef struct{
 	int partID;
@@ -14,7 +18,7 @@ typedef struct{
 
 int numDigits(int part);
 
-void * RLEcompress(void * workInf);
+void RLEcompress(void * workInf);
 
 void compressT_LOLS(char * filename, int threadCount);
 
