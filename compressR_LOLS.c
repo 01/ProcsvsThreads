@@ -1,6 +1,6 @@
 #include "compressRT.h"
 
-compressR_LOLS(char* fileName, int numParts){
+void compressR_LOLS(char* fileName, int numParts){
 
 	FILE* fp;
 	fp = fopen(fileName, "r");
@@ -25,14 +25,15 @@ compressR_LOLS(char* fileName, int numParts){
 		if(i == 0){
 			
 			length = partSize + remainder;
-			offset += 0;
+			
 			printf("line 33 length:%d offset:%d\n", length, offset);
 		}
 			
 		else{
 			
-			length = partSize;
 			offset += length;
+			length = partSize;
+			
 			printf("line 40 length:%d offset:%d\n", length, offset);
 		}
 
@@ -47,7 +48,7 @@ compressR_LOLS(char* fileName, int numParts){
 		if(pids[i] == 0){
 
 			char** args = malloc(sizeof(char*) *6);
-			args[0] = "./2compressR_worker_LOLS";
+			args[0] = "./compressR_worker_LOLS";
 			args[1] = fileName;
 			args[2] = (char *)malloc(numDigits(i)+1);
 			args[3] = (char *)malloc(numDigits(numParts)+1);
