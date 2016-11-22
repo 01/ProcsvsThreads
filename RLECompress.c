@@ -24,7 +24,7 @@ int numDigits(int threads){
 }
 void * RLEcompress(void * work);
 
-compressT_LOLS(char * filename, int threadCount){
+void compressT_LOLS(char * filename, int threadCount){
 
    FILE *fp;
    pthread_t tid[threadCount];
@@ -48,6 +48,7 @@ compressT_LOLS(char * filename, int threadCount){
    int i;
    int offset=0;
    for(i=0; i<threadCount; i++){
+   		
    		workInfo * work= malloc(sizeof(workInfo));
    		work->filename = filename;
    		work->thread_id = i;
@@ -155,7 +156,7 @@ int main(int argc, char *argv[]) {
    }
    rewind(fp);
   printf("Makes it here\n");
-compressT_LOLS("./stuff.txt", 1);
+compressT_LOLS("./stuff.txt", 2);
 
   return 0;
 }
