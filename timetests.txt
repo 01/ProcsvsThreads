@@ -1,0 +1,344 @@
+Time Tests - Multiprocessing vs Multithreading
+
+
+Test 1 Results
+
+This tested multiprocessing vs multithreading on a file containing 1000 'a' characters.
+It tested multipart compression on 1 part, 10 parts, 20 parts, ..., 500 parts.
+We ran this test 5 times, and recorded the number of times multiprocessing or multithreading was faster.
+
+
+	Which is faster?
+	Thread   Process
+1.	31       20
+2.	29	 22
+3.	39	 12
+4.	39	 12
+5.	35	 16
+Total   173      82
+
+Multithreading was generally faster than multiprocessing.
+
+Below is an example run of this test.
+
+
+1 Parts: Thread: 1551 usec Proc: 1604 usec   Multithreading is 0.033042 percent faster
+10 Parts: Thread: 5868 usec Proc: 6559 usec   Multithreading is 0.105351 percent faster
+20 Parts: Thread: 8505 usec Proc: 9775 usec   Multithreading is 0.129923 percent faster
+30 Parts: Thread: 12104 usec Proc: 11070 usec   Multiprocessing is 0.085426 percent faster
+40 Parts: Thread: 16641 usec Proc: 16169 usec   Multiprocessing is 0.028364 percent faster
+50 Parts: Thread: 25028 usec Proc: 18880 usec   Multiprocessing is 0.245645 percent faster
+60 Parts: Thread: 24364 usec Proc: 21906 usec   Multiprocessing is 0.100887 percent faster
+70 Parts: Thread: 31045 usec Proc: 24152 usec   Multiprocessing is 0.222033 percent faster
+80 Parts: Thread: 28630 usec Proc: 28996 usec   Multithreading is 0.012622 percent faster
+90 Parts: Thread: 33510 usec Proc: 32437 usec   Multiprocessing is 0.032020 percent faster
+100 Parts: Thread: 37279 usec Proc: 35617 usec   Multiprocessing is 0.044583 percent faster
+110 Parts: Thread: 39798 usec Proc: 39104 usec   Multiprocessing is 0.017438 percent faster
+120 Parts: Thread: 43381 usec Proc: 45233 usec   Multithreading is 0.040944 percent faster
+130 Parts: Thread: 45782 usec Proc: 47602 usec   Multithreading is 0.038234 percent faster
+140 Parts: Thread: 57524 usec Proc: 58060 usec   Multithreading is 0.009232 percent faster
+150 Parts: Thread: 53835 usec Proc: 52999 usec   Multiprocessing is 0.015529 percent faster
+160 Parts: Thread: 57657 usec Proc: 62294 usec   Multithreading is 0.074437 percent faster
+170 Parts: Thread: 83926 usec Proc: 71585 usec   Multiprocessing is 0.147046 percent faster
+180 Parts: Thread: 74073 usec Proc: 88564 usec   Multithreading is 0.163622 percent faster
+190 Parts: Thread: 112724 usec Proc: 92806 usec   Multiprocessing is 0.176697 percent faster
+200 Parts: Thread: 75620 usec Proc: 70358 usec   Multiprocessing is 0.069585 percent faster
+210 Parts: Thread: 101418 usec Proc: 92813 usec   Multiprocessing is 0.084847 percent faster
+220 Parts: Thread: 77913 usec Proc: 73664 usec   Multiprocessing is 0.054535 percent faster
+230 Parts: Thread: 94953 usec Proc: 129395 usec   Multithreading is 0.266177 percent faster
+240 Parts: Thread: 122372 usec Proc: 100586 usec   Multiprocessing is 0.178031 percent faster
+250 Parts: Thread: 105301 usec Proc: 86219 usec   Multiprocessing is 0.181214 percent faster
+260 Parts: Thread: 99372 usec Proc: 91233 usec   Multiprocessing is 0.081904 percent faster
+270 Parts: Thread: 100860 usec Proc: 94640 usec   Multiprocessing is 0.061670 percent faster
+280 Parts: Thread: 128113 usec Proc: 129838 usec   Multithreading is 0.013286 percent faster
+290 Parts: Thread: 117302 usec Proc: 113357 usec   Multiprocessing is 0.033631 percent faster
+300 Parts: Thread: 105584 usec Proc: 111864 usec   Multithreading is 0.056140 percent faster
+310 Parts: Thread: 110223 usec Proc: 126911 usec   Multithreading is 0.131494 percent faster
+320 Parts: Thread: 117607 usec Proc: 125253 usec   Multithreading is 0.061044 percent faster
+330 Parts: Thread: 151521 usec Proc: 128100 usec   Multiprocessing is 0.154573 percent faster
+340 Parts: Thread: 120520 usec Proc: 127713 usec   Multithreading is 0.056322 percent faster
+350 Parts: Thread: 140331 usec Proc: 136547 usec   Multiprocessing is 0.026965 percent faster
+360 Parts: Thread: 137952 usec Proc: 150381 usec   Multithreading is 0.082650 percent faster
+370 Parts: Thread: 160760 usec Proc: 147011 usec   Multiprocessing is 0.085525 percent faster
+380 Parts: Thread: 151318 usec Proc: 130570 usec   Multiprocessing is 0.137115 percent faster
+390 Parts: Thread: 149933 usec Proc: 163896 usec   Multithreading is 0.085194 percent faster
+400 Parts: Thread: 159670 usec Proc: 170055 usec   Multithreading is 0.061068 percent faster
+410 Parts: Thread: 160109 usec Proc: 165276 usec   Multithreading is 0.031263 percent faster
+420 Parts: Thread: 151716 usec Proc: 148024 usec   Multiprocessing is 0.024335 percent faster
+430 Parts: Thread: 160330 usec Proc: 164086 usec   Multithreading is 0.022890 percent faster
+440 Parts: Thread: 164104 usec Proc: 161424 usec   Multiprocessing is 0.016331 percent faster
+450 Parts: Thread: 182224 usec Proc: 163570 usec   Multiprocessing is 0.102369 percent faster
+460 Parts: Thread: 176617 usec Proc: 181258 usec   Multithreading is 0.025604 percent faster
+470 Parts: Thread: 193645 usec Proc: 172783 usec   Multiprocessing is 0.107733 percent faster
+480 Parts: Thread: 164696 usec Proc: 167252 usec   Multithreading is 0.015282 percent faster
+490 Parts: Thread: 174187 usec Proc: 178066 usec   Multithreading is 0.021784 percent faster
+500 Parts: Thread: 205144 usec Proc: 189998 usec   Multiprocessing is 0.073831 percent faster
+
+
+-------------------------------------------------------------------------------------------
+
+Test 2 Results
+
+This tested multiprocessing vs multithreading on a file containing 1000 'a' characters.
+It tested multipart compression on 5 parts.
+We ran this test 255 times, and recorded the number of times multiprocessing or multithreading was faster.
+
+
+	Which is faster?
+	Thread   Process
+1.	46       5
+2.	45	 6
+3.	45	 6
+4.	48	 3
+5.	46	 5
+Total   230      25
+
+
+Multithreading was almost always faster than multiprocessing.
+
+Below is an example run of this test.
+
+
+5 Parts: Thread: 3356 usec Proc: 3887 usec   Multithreading is 13.660921 percent faster
+5 Parts: Thread: 3484 usec Proc: 4686 usec   Multithreading is 25.650875 percent faster
+5 Parts: Thread: 2650 usec Proc: 3443 usec   Multithreading is 23.032240 percent faster
+5 Parts: Thread: 3454 usec Proc: 5162 usec   Multithreading is 33.087952 percent faster
+5 Parts: Thread: 3693 usec Proc: 4671 usec   Multithreading is 20.937700 percent faster
+5 Parts: Thread: 4487 usec Proc: 11016 usec   Multithreading is 59.268337 percent faster
+5 Parts: Thread: 4165 usec Proc: 4480 usec   Multithreading is 7.031250 percent faster
+5 Parts: Thread: 3451 usec Proc: 4568 usec   Multithreading is 24.452715 percent faster
+5 Parts: Thread: 3323 usec Proc: 3656 usec   Multithreading is 9.108315 percent faster
+5 Parts: Thread: 3126 usec Proc: 3470 usec   Multithreading is 9.913545 percent faster
+5 Parts: Thread: 2801 usec Proc: 3387 usec   Multithreading is 17.301447 percent faster
+5 Parts: Thread: 2929 usec Proc: 4864 usec   Multithreading is 39.782074 percent faster
+5 Parts: Thread: 3337 usec Proc: 3415 usec   Multithreading is 2.284041 percent faster
+5 Parts: Thread: 3702 usec Proc: 5227 usec   Multithreading is 29.175436 percent faster
+5 Parts: Thread: 4346 usec Proc: 4366 usec   Multithreading is 0.458085 percent faster
+5 Parts: Thread: 4009 usec Proc: 7521 usec   Multithreading is 46.695919 percent faster
+5 Parts: Thread: 2704 usec Proc: 3641 usec   Multithreading is 25.734688 percent faster
+5 Parts: Thread: 2758 usec Proc: 3429 usec   Multithreading is 19.568388 percent faster
+5 Parts: Thread: 3950 usec Proc: 3511 usec   Multiprocessing is 11.113924 percent faster
+5 Parts: Thread: 3193 usec Proc: 3627 usec   Multithreading is 11.965812 percent faster
+5 Parts: Thread: 5817 usec Proc: 5590 usec   Multiprocessing is 3.902355 percent faster
+5 Parts: Thread: 3441 usec Proc: 4350 usec   Multithreading is 20.896551 percent faster
+5 Parts: Thread: 2694 usec Proc: 3727 usec   Multithreading is 27.716661 percent faster
+5 Parts: Thread: 2872 usec Proc: 3603 usec   Multithreading is 20.288649 percent faster
+5 Parts: Thread: 3298 usec Proc: 4648 usec   Multithreading is 29.044750 percent faster
+5 Parts: Thread: 5702 usec Proc: 5052 usec   Multiprocessing is 11.399508 percent faster
+5 Parts: Thread: 3823 usec Proc: 4944 usec   Multithreading is 22.673948 percent faster
+5 Parts: Thread: 4086 usec Proc: 4819 usec   Multithreading is 15.210625 percent faster
+5 Parts: Thread: 7279 usec Proc: 4786 usec   Multiprocessing is 34.249210 percent faster
+5 Parts: Thread: 3821 usec Proc: 4759 usec   Multithreading is 19.710024 percent faster
+5 Parts: Thread: 3450 usec Proc: 6569 usec   Multithreading is 47.480591 percent faster
+5 Parts: Thread: 3997 usec Proc: 4934 usec   Multithreading is 18.990677 percent faster
+5 Parts: Thread: 4006 usec Proc: 4483 usec   Multithreading is 10.640196 percent faster
+5 Parts: Thread: 4637 usec Proc: 4496 usec   Multiprocessing is 3.040759 percent faster
+5 Parts: Thread: 4486 usec Proc: 4548 usec   Multithreading is 1.363237 percent faster
+5 Parts: Thread: 3740 usec Proc: 4801 usec   Multithreading is 22.099562 percent faster
+5 Parts: Thread: 3350 usec Proc: 4408 usec   Multithreading is 24.001816 percent faster
+5 Parts: Thread: 3927 usec Proc: 5174 usec   Multithreading is 24.101276 percent faster
+5 Parts: Thread: 4553 usec Proc: 5323 usec   Multithreading is 14.465527 percent faster
+5 Parts: Thread: 3307 usec Proc: 5463 usec   Multithreading is 39.465496 percent faster
+5 Parts: Thread: 4356 usec Proc: 4443 usec   Multithreading is 1.958136 percent faster
+5 Parts: Thread: 4136 usec Proc: 4581 usec   Multithreading is 9.714036 percent faster
+5 Parts: Thread: 4238 usec Proc: 4597 usec   Multithreading is 7.809441 percent faster
+5 Parts: Thread: 4191 usec Proc: 4865 usec   Multithreading is 13.854059 percent faster
+5 Parts: Thread: 4292 usec Proc: 4727 usec   Multithreading is 9.202454 percent faster
+5 Parts: Thread: 4669 usec Proc: 4692 usec   Multithreading is 0.490196 percent faster
+5 Parts: Thread: 3824 usec Proc: 4551 usec   Multithreading is 15.974511 percent faster
+5 Parts: Thread: 5479 usec Proc: 9174 usec   Multithreading is 40.276871 percent faster
+5 Parts: Thread: 3942 usec Proc: 5509 usec   Multithreading is 28.444365 percent faster
+5 Parts: Thread: 3871 usec Proc: 4912 usec   Multithreading is 21.192997 percent faster
+5 Parts: Thread: 3804 usec Proc: 6972 usec   Multithreading is 45.438900 percent faster
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+Test 3 Results
+
+This tested multiprocessing vs multithreading on a file containing 1000 'a' characters.
+It tested multipart compression on 100 parts.
+We ran this test 255 times, and recorded the number of times multiprocessing or multithreading was faster.
+
+
+	Which is faster?
+	Thread   Process
+1.	50       1
+2.	50	 1
+3.	47	 4
+4.	47	 4
+5.	42	 9
+Total   236      19
+
+Multithreading was almost always faster than multiprocessing.
+
+Below is an example run of this test.
+
+
+100 Parts: Thread: 46678 usec Proc: 57049 usec   Multithreading is 18.179110 percent faster
+100 Parts: Thread: 36373 usec Proc: 57810 usec   Multithreading is 37.081821 percent faster
+100 Parts: Thread: 37454 usec Proc: 46280 usec   Multithreading is 19.070873 percent faster
+100 Parts: Thread: 37979 usec Proc: 49515 usec   Multithreading is 23.297991 percent faster
+100 Parts: Thread: 36154 usec Proc: 49240 usec   Multithreading is 26.575954 percent faster
+100 Parts: Thread: 38072 usec Proc: 59580 usec   Multithreading is 36.099361 percent faster
+100 Parts: Thread: 36031 usec Proc: 62344 usec   Multithreading is 42.206146 percent faster
+100 Parts: Thread: 43527 usec Proc: 51027 usec   Multithreading is 14.698101 percent faster
+100 Parts: Thread: 42539 usec Proc: 52565 usec   Multithreading is 19.073528 percent faster
+100 Parts: Thread: 37588 usec Proc: 57591 usec   Multithreading is 34.732857 percent faster
+100 Parts: Thread: 37316 usec Proc: 47240 usec   Multithreading is 21.007620 percent faster
+100 Parts: Thread: 57502 usec Proc: 69403 usec   Multithreading is 17.147675 percent faster
+100 Parts: Thread: 38339 usec Proc: 51895 usec   Multithreading is 26.121977 percent faster
+100 Parts: Thread: 40291 usec Proc: 53367 usec   Multithreading is 24.502033 percent faster
+100 Parts: Thread: 48485 usec Proc: 50436 usec   Multithreading is 3.868269 percent faster
+100 Parts: Thread: 39478 usec Proc: 47412 usec   Multithreading is 16.734159 percent faster
+100 Parts: Thread: 35669 usec Proc: 57736 usec   Multithreading is 38.220520 percent faster
+100 Parts: Thread: 42592 usec Proc: 52067 usec   Multithreading is 18.197706 percent faster
+100 Parts: Thread: 48209 usec Proc: 46897 usec   Multiprocessing is 2.721483 percent faster
+100 Parts: Thread: 49547 usec Proc: 52818 usec   Multithreading is 6.192965 percent faster
+100 Parts: Thread: 46612 usec Proc: 46688 usec   Multithreading is 0.162783 percent faster
+100 Parts: Thread: 36845 usec Proc: 60246 usec   Multithreading is 38.842411 percent faster
+100 Parts: Thread: 57582 usec Proc: 83421 usec   Multithreading is 30.974215 percent faster
+100 Parts: Thread: 42694 usec Proc: 68323 usec   Multithreading is 37.511528 percent faster
+100 Parts: Thread: 37777 usec Proc: 52893 usec   Multithreading is 28.578451 percent faster
+100 Parts: Thread: 37937 usec Proc: 59575 usec   Multithreading is 36.320602 percent faster
+100 Parts: Thread: 39064 usec Proc: 46992 usec   Multithreading is 16.870956 percent faster
+100 Parts: Thread: 36812 usec Proc: 49043 usec   Multithreading is 24.939339 percent faster
+100 Parts: Thread: 36616 usec Proc: 56059 usec   Multithreading is 34.683102 percent faster
+100 Parts: Thread: 34343 usec Proc: 47165 usec   Multithreading is 27.185413 percent faster
+100 Parts: Thread: 34141 usec Proc: 54325 usec   Multithreading is 37.154163 percent faster
+100 Parts: Thread: 32839 usec Proc: 61734 usec   Multithreading is 46.805649 percent faster
+100 Parts: Thread: 38670 usec Proc: 61042 usec   Multithreading is 36.650177 percent faster
+100 Parts: Thread: 38224 usec Proc: 63587 usec   Multithreading is 39.887085 percent faster
+100 Parts: Thread: 41749 usec Proc: 55987 usec   Multithreading is 25.430904 percent faster
+100 Parts: Thread: 36704 usec Proc: 45658 usec   Multithreading is 19.611021 percent faster
+100 Parts: Thread: 33990 usec Proc: 46077 usec   Multithreading is 26.232176 percent faster
+100 Parts: Thread: 31378 usec Proc: 46990 usec   Multithreading is 33.224091 percent faster
+100 Parts: Thread: 38107 usec Proc: 41401 usec   Multithreading is 7.956329 percent faster
+100 Parts: Thread: 32725 usec Proc: 51398 usec   Multithreading is 36.330208 percent faster
+100 Parts: Thread: 35075 usec Proc: 53903 usec   Multithreading is 34.929409 percent faster
+100 Parts: Thread: 31119 usec Proc: 49976 usec   Multithreading is 37.732113 percent faster
+100 Parts: Thread: 37553 usec Proc: 47147 usec   Multithreading is 20.349121 percent faster
+100 Parts: Thread: 32114 usec Proc: 49782 usec   Multithreading is 35.490738 percent faster
+100 Parts: Thread: 34366 usec Proc: 59146 usec   Multithreading is 41.896324 percent faster
+100 Parts: Thread: 42598 usec Proc: 59950 usec   Multithreading is 28.944120 percent faster
+100 Parts: Thread: 49532 usec Proc: 72205 usec   Multithreading is 31.400873 percent faster
+100 Parts: Thread: 37037 usec Proc: 55097 usec   Multithreading is 32.778553 percent faster
+100 Parts: Thread: 40022 usec Proc: 45644 usec   Multithreading is 12.317062 percent faster
+100 Parts: Thread: 31913 usec Proc: 47200 usec   Multithreading is 32.387711 percent faster
+100 Parts: Thread: 39204 usec Proc: 50530 usec   Multithreading is 22.414408 percent faster
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+Test 4 Results
+
+This tested multiprocessing vs multithreading on a file containing 10 'a' characters.
+It tested multipart compression on 5 parts.
+We ran this test 255 times, and recorded the number of times multiprocessing or multithreading was faster.
+
+
+	Which is faster?
+	Thread   Process
+1.	36       15
+2.	38	 13
+3.	35	 16
+4.	38	 13
+5.	45	 6
+Total   192      63
+
+Multithreading was almost always faster than multiprocessing.
+
+Below is an example run of this test.
+
+
+5 Parts: Thread: 5893 usec Proc: 4747 usec   Multiprocessing is 19.446802 percent faster
+5 Parts: Thread: 3567 usec Proc: 4088 usec   Multithreading is 12.744618 percent faster
+5 Parts: Thread: 3333 usec Proc: 7352 usec   Multithreading is 54.665398 percent faster
+5 Parts: Thread: 3116 usec Proc: 3536 usec   Multithreading is 11.877828 percent faster
+5 Parts: Thread: 2925 usec Proc: 3378 usec   Multithreading is 13.410302 percent faster
+5 Parts: Thread: 2561 usec Proc: 4775 usec   Multithreading is 46.366493 percent faster
+5 Parts: Thread: 3601 usec Proc: 4438 usec   Multithreading is 18.859846 percent faster
+5 Parts: Thread: 5321 usec Proc: 4725 usec   Multiprocessing is 11.200902 percent faster
+5 Parts: Thread: 3730 usec Proc: 4582 usec   Multithreading is 18.594500 percent faster
+5 Parts: Thread: 4472 usec Proc: 4805 usec   Multithreading is 6.930281 percent faster
+5 Parts: Thread: 3272 usec Proc: 4523 usec   Multithreading is 27.658634 percent faster
+5 Parts: Thread: 4028 usec Proc: 4491 usec   Multithreading is 10.309508 percent faster
+5 Parts: Thread: 3006 usec Proc: 4685 usec   Multithreading is 35.837780 percent faster
+5 Parts: Thread: 3455 usec Proc: 4783 usec   Multithreading is 27.765001 percent faster
+5 Parts: Thread: 3380 usec Proc: 4166 usec   Multithreading is 18.867020 percent faster
+5 Parts: Thread: 3822 usec Proc: 4391 usec   Multithreading is 12.958323 percent faster
+5 Parts: Thread: 4067 usec Proc: 5558 usec   Multithreading is 26.826197 percent faster
+5 Parts: Thread: 4106 usec Proc: 8053 usec   Multithreading is 49.012791 percent faster
+5 Parts: Thread: 3755 usec Proc: 4701 usec   Multithreading is 20.123379 percent faster
+5 Parts: Thread: 3925 usec Proc: 5051 usec   Multithreading is 22.292616 percent faster
+5 Parts: Thread: 3876 usec Proc: 5185 usec   Multithreading is 25.245901 percent faster
+5 Parts: Thread: 3587 usec Proc: 4389 usec   Multithreading is 18.272955 percent faster
+5 Parts: Thread: 3483 usec Proc: 7208 usec   Multithreading is 51.678692 percent faster
+5 Parts: Thread: 3774 usec Proc: 4522 usec   Multithreading is 16.541353 percent faster
+5 Parts: Thread: 3448 usec Proc: 4408 usec   Multithreading is 21.778584 percent faster
+5 Parts: Thread: 3390 usec Proc: 5310 usec   Multithreading is 36.158192 percent faster
+5 Parts: Thread: 3316 usec Proc: 3762 usec   Multithreading is 11.855396 percent faster
+5 Parts: Thread: 2781 usec Proc: 3691 usec   Multithreading is 24.654566 percent faster
+5 Parts: Thread: 2871 usec Proc: 4735 usec   Multithreading is 39.366421 percent faster
+5 Parts: Thread: 3666 usec Proc: 4888 usec   Multithreading is 25.000000 percent faster
+5 Parts: Thread: 3807 usec Proc: 4555 usec   Multithreading is 16.421515 percent faster
+5 Parts: Thread: 6435 usec Proc: 4335 usec   Multiprocessing is 32.634033 percent faster
+5 Parts: Thread: 4014 usec Proc: 4961 usec   Multithreading is 19.088894 percent faster
+5 Parts: Thread: 3879 usec Proc: 18567 usec   Multithreading is 79.108093 percent faster
+5 Parts: Thread: 22316 usec Proc: 5105 usec   Multiprocessing is 77.124039 percent faster
+5 Parts: Thread: 4535 usec Proc: 4299 usec   Multiprocessing is 5.203969 percent faster
+5 Parts: Thread: 3633 usec Proc: 4455 usec   Multithreading is 18.451178 percent faster
+5 Parts: Thread: 4178 usec Proc: 4845 usec   Multithreading is 13.766769 percent faster
+5 Parts: Thread: 5023 usec Proc: 7942 usec   Multithreading is 36.753967 percent faster
+5 Parts: Thread: 4197 usec Proc: 4583 usec   Multithreading is 8.422431 percent faster
+5 Parts: Thread: 3694 usec Proc: 4779 usec   Multithreading is 22.703495 percent faster
+5 Parts: Thread: 4090 usec Proc: 5950 usec   Multithreading is 31.260504 percent faster
+5 Parts: Thread: 4036 usec Proc: 4524 usec   Multithreading is 10.786914 percent faster
+5 Parts: Thread: 4319 usec Proc: 4772 usec   Multithreading is 9.492875 percent faster
+5 Parts: Thread: 4431 usec Proc: 4468 usec   Multithreading is 0.828111 percent faster
+5 Parts: Thread: 5147 usec Proc: 8413 usec   Multithreading is 38.820873 percent faster
+5 Parts: Thread: 16537 usec Proc: 18087 usec   Multithreading is 8.569691 percent faster
+5 Parts: Thread: 17309 usec Proc: 30170 usec   Multithreading is 42.628437 percent faster
+5 Parts: Thread: 14721 usec Proc: 21576 usec   Multithreading is 31.771412 percent faster
+5 Parts: Thread: 20917 usec Proc: 18089 usec   Multiprocessing is 13.520103 percent faster
+5 Parts: Thread: 16335 usec Proc: 28830 usec   Multithreading is 43.340271 percent faster
+
+
+-------------------------------------------------------------------------------------------
+
+
+Test 5 Results
+
+This tested multiprocessing vs multithreading on a file containing the sequence "abcdefghijklmnopqrstuvwxyz" 5 times.
+It tested multipart compression on 5 parts.
+We ran this test 255 times, and recorded the number of times multiprocessing or multithreading was faster.
+
+
+	Which is faster?
+	Thread   Process
+1.	46       5
+2.	33	 18
+3.	45	 6
+4.	42	 9
+5.	41	 10
+Total   207      48
+
+Multithreading was almost always faster than multiprocessing.
+
+Below is an example run of this test.
+
+
+
+
+
+
+
+
+
+
+
+
