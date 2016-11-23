@@ -20,9 +20,8 @@ void RLEcompress(void * workInf){
 	//printf("Thread # %d\n", partID);
 
 	FILE* fp = fopen(work->filename, "r");
-	char* outputFile = malloc(strlen(work->filename) + numDigits(partID) + 15);
-	strcpy(outputFile, "./Output/");
-	strcpy((outputFile + 9), work->filename);
+	char* outputFile = malloc(strlen(work->filename) + numDigits(partID) + 7);
+	strcpy((outputFile), work->filename);
 	*(outputFile+strlen(outputFile)-4)='_';
 
 	if(work->numPart > 1){
