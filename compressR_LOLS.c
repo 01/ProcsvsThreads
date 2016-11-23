@@ -2,20 +2,39 @@
 
 void compressR_LOLS(char* fileName, int numParts){
 
+	if(numParts < 1){
+
+		printf("Error: Must have at least 1 process.\n");
+		exit(1);
+	}
+
 	FILE* fp;
 	fp = fopen(fileName, "r");
+
+	if(!fp){
+
+		printf("Error: File not found.\n");
+		exit(1);
+	}
 
 	fseek(fp, 0, SEEK_END);
 	int fileSize = ftell(fp)-1;
 	rewind(fp);
 
-	printf("File contains %d characters\n", fileSize);
+	//printf("File contains %d characters\n", fileSize);
+
+	if(numParts > fileSize){
+		printf("Error: Cannot have more processes than characters in file.\n");
+		exit(1);
+	}
+
+	//printf("File contains %d characters\n", fileSize);
 
 	int remainder = fileSize % numParts;
 	int partSize = (fileSize - remainder) / numParts;
 
 	pid_t pids[numParts];
-	
+	fclose(fp);
 	int offset = 0;
 	int i;
 	for(i=0; i<numParts; i++){
@@ -26,15 +45,15 @@ void compressR_LOLS(char* fileName, int numParts){
 			
 			length = partSize + remainder;
 			
-			printf("line 33 length:%d offset:%d\n", length, offset);
+			//printf("line 33 length:%d offset:%d\n", length, offset);
 		}
 			
 		else{
 			
 			offset += length;
 			length = partSize;
-			
-			printf("line 40 length:%d offset:%d\n", length, offset);
+
+			//printf("line 40 length:%d offset:%d\n", length, offset);
 		}
 
 		pids[i] = fork();
@@ -59,7 +78,7 @@ void compressR_LOLS(char* fileName, int numParts){
 			sprintf(args[4], "%d", length);
 			sprintf(args[5], "%d", offset);
 			
-			printf("line 65 %s %s %s %s\n", args[2], args[3], args[4], args[5]);
+			//printf("line 65 %s %s %s %s\n", args[2], args[3], args[4], args[5]);
 
 			execvp(args[0], args);
 			

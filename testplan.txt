@@ -1,0 +1,169 @@
+Test Cases for compressR and compressT
+
+Inputs show character stream in input file and number of parts (processes/threads).
+Outputs show expected character stream written to each output file.
+
+*Parts refers to number of processes/threads.
+
+-------------------------------------------------------
+
+Case Type: Character stream increments/decrements by 1 character
+
+Input:
+abbcccddddeeeeeaaaaabbbbcccdde
+2 parts
+
+Output:
+abb3c4d5e
+5a4b3cdde
+
+-------------------------------------------------------
+
+Case Type: Character stream is 1 single repeating character
+
+Input:
+a
+1 part
+
+Output:
+a
+
+Input:
+aa
+1 part
+
+Output:
+aa
+
+Input:
+aaa
+1 part
+
+Output:
+3a
+
+-------------------------------------------------------
+
+Case Type: Character stream is 1 single repeating character split into multiple parts
+
+Input:
+aaaaaaaaaaa
+3 parts
+
+Output:
+5a
+3a
+3a
+
+Input:
+aaaaa
+5 parts
+
+Output:
+a
+a
+a
+a
+a
+
+-------------------------------------------------------
+
+Case Type: Character stream has multiple non-alphabetic characters separating 1 single repeating character
+
+Input:
+a a  a   a1a579a6789879876a          aa   89   890 890 9  a   809
+1 part
+
+Output:
+10a
+
+-------------------------------------------------------
+
+Case Type: Character stream has multiple non-alphabetic characters separating multiple repeating characters
+
+Input:
+a  a   ab b  bc  c   cd5d67d890e 8 8  e  8 8 e  eeee  8 8 ee a 8 8b  8 8 8 c 8  8888d     e
+1 part
+
+Output:
+3a3b3c3d9eabcde
+
+-------------------------------------------------------
+
+Case Type: Character stream is a huge sequence of 1 repeating character
+
+Input:
+bbbbbbbbbb...(10000 'b's)
+1 part
+
+Output:
+10000b
+
+Input:
+bbbbbbbbbb...(10000 'b's)
+500 parts
+
+Output:
+20b
+20b
+20b
+20b
+20b
+.
+.
+.
+(500 lines of "20b")
+
+-------------------------------------------------------
+
+Case Type: Character stream is blank (file is empty)
+
+Input:
+(blank)
+1 part
+
+Output:
+Error: Cannot have more [processes/threads] than characters in file.
+
+-------------------------------------------------------
+
+Case Type: Character stream has all non-alphabetic characters
+
+Input:423891439483174318318276       3182736218376     812 27 318 312  83 38 2  37 3 2 8 8222   27 28
+1 part
+
+Output:
+(blank)
+
+-------------------------------------------------------
+
+Case Type: User inputs incorrect file name (does not match input file)
+
+Input: ["Incorrect file name"]
+1 part
+
+Output:
+Error: File not found.
+
+-------------------------------------------------------
+
+Case Type: Large character stream with many parts
+
+Input:
+aa a987a 987a aa 9a87 a987a 987a987 a98a98a 7a98 a987a987a 98a987 a98a 987a 9a87 a987a 9a8 7a987 aa879 8a 987aa 987aa 9a a78 9aa7 aa 987a 987aa a 987a a7a a 79aaaaa a 987a 87aaaa 987a 987a 987a87a a 987a 9a8798a a98 987a 87a aaaaa 987a987a 98aab 098b087b 70bbbbb 987bb8 76bb bb 876b8765b87 6bbb 876b87b 5b 87b 7bbbb 765b 8765bbb 8765bb87bbb87 6b5 87b7b8bb876 b5876b b857b65 b876 b87   ccc 87c 87c4ccc 4c7c8765cccc98 6c5c7 c 3c cc9c8 c987 c98c 7c98c 9c 9cccc c 98c9875c987c5ccc 9cc 98c987c98c8c985 c87 5c9898c598c598c598c 8cccccccc9 87598 59875 98 d 9875987598d98dd 8d 98dd987d d98d d9875dddd 897 9875ddddddd 98dddddd 98d75dddd 9875 89765 9875 eeeeeeee 98e765e875eeeee 9875e98 7598eeeeeee98 7598 758ee 87e598e7598e 7598e7 58
+10 parts
+
+Output:
+22a
+22a
+24a
+11a16b
+26b
+5b22c
+24c
+12c9d
+24d8e
+21e
+
+
+
